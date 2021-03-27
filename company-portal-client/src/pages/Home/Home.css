@@ -1,0 +1,40 @@
+.news-container {
+  margin-top: 5vh;
+  display: flex;
+  justify-content: space-between;
+  width: 145%;
+  margin-left: -15rem;
+}
+.general-news,
+.custom-news {
+  font-size: 4vh;
+  width: 70vh;
+  display: flex;
+  justify-content: center;
+}
+.home-general-news,
+.home-custom-news {
+  padding: 2rem;
+  min-height: 85vh;
+  background-color: aqua;
+  justify-content: center;
+}
+
+.home-blog-container {
+  margin-top: 5vh;
+  justify-content: center;
+  width: 100%;
+  min-height: 50vh;
+  background-color: aqua;
+}
+
+.home-weather-container {
+  margin-top: 5vh;
+  width: 40%;
+  min-height: 40vh;
+  background-color: aqua;
+}
+
+svg {
+  cursor: pointer;
+}

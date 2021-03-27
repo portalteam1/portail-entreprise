@@ -5,7 +5,7 @@ import {faAngleLeft, faAngleRight} from "@fortawesome/free-solid-svg-icons"
 
 const CustomNews = () =>{
     return(
-        <div className="general-news">
+        <div className="custom-news">
             <FontAwesomeIcon icon={faAngleLeft}/>
             <h1>Custom News</h1>
             <FontAwesomeIcon icon={faAngleRight}/>
