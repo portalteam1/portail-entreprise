@@ -1,40 +1,92 @@
-import { fetchWeather } from '../../components/weather/fetchWeather';
-import  '../../weather.css';
+import React, { useState,useEffect } from 'react';
+import { usePosition } from 'use-position';
+import  './Weather.css';
+const api = {
+    key: "30f10ec8bdd751c02d10d863e0504674",
+    base: "https://api.openweathermap.org/data/2.5/"
+}
 
-const Weather = () => {
+function Weather() {
     const [query, setQuery] = useState('');
     const [weather, setWeather] = useState({});
-
-    const search = async (e) => {
-        if(e.key === 'Enter') {
-            const data = await fetchWeather(query);
-
-            setWeather(data);
-            setQuery('');
+    const search = evt => {
+        if (evt.key === "Enter") {
+            fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+                .then(res => res.json())
+                .then(result => {
+                    setWeather(result);
+                    setQuery('');
+                    console.log(result);
+                });
         }
+    }
+   const Default= ()=> {
+       /*const { latitude, longitude, error } = usePosition();
+       useEffect(() => {
+           if (latitude && longitude && !error) {
+               // Fetch weather data here.
+               console.log('lat:'+latitude +' long: '+longitude);
+           } else{
+               console.log('error');
+
+           }
+       }, []);*/
+     /*  if (navigator.geolocation) {
+           console.log(navigator.geolocation);
+       } else {
+           alert("Sorry Not available!");
+       }*/
+      const query='sousse';
+       fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+           .then(res => res.json())
+           .then(result => {
+               setWeather(result);
+               setQuery('');
+               console.log(result);
+           });
+    }
+
+    const dateBuilder = (d) => {
+        let months = ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"];
+        let days = ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
+
+        let day = days[d.getDay()];
+        let date = d.getDate();
+        let month = months[d.getMonth()];
+        let year = d.getFullYear();
+
+        return `${day} ${date} ${month} ${year}`
     }
 
     return (
-        <div className="main-container">
-            <input type="text"className="search"placeholder="Search..."value={query}onChange={(e) => setQuery(e.target.value)}onKeyPress={search}/>
-            {weather.main && (
-                <div className="city">
-                    <h2 className="city-name">
-                        <span>{weather.name}</span>
-                        <sup>{weather.sys.country}</sup>
-                    </h2>
-                    <div className="city-temp">
-                        {Math.round(weather.main.temp)}
-                        <sup>&deg;C</sup>
-                    </div>
-                    <div className="info">
-                        <img className="city-icon" src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt={weather.weather[0].description} />
-                        <p>{weather.weather[0].description}</p>
-                    </div>
+        <div className={(typeof weather.main != "undefined") ? ((weather.main.temp > 16) ? 'app warm' : 'app') : 'app'}>
+            <main>
+                <div className="search-box">
+                    <input
+                        type="text"
+                        className="search-bar"
+                        placeholder="Search..."
+                        onChange={e => setQuery(e.target.value)}
+                        value={query}
+                        onKeyPress={search}
+                    />
                 </div>
-            )}
+                {(typeof weather.main != "undefined") ? (
+                    <div>
+                        <div className="location-box">
+                            <div className="location">{weather.name}, {weather.sys.country}</div>
+                            <div className="date">{dateBuilder(new Date())}</div>
+                        </div>
+                        <div className="weather-box">
+                            <div className="temp">
+                                {Math.round(weather.main.temp)}°c
+                            </div>
+                            <div className="weather">{weather.weather[0].main}</div>
+                        </div>
+                    </div>
+                ) : (<div> {Default()}</div>)}
+            </main>
         </div>
     );
 }
-
 export default Weather;
