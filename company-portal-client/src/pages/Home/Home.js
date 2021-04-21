@@ -1,7 +1,7 @@
 import React from "react";
 
 //adding style
-
+import styles from "../../styles/Home.module.css";
 
 //adding components
 import Blog from "../../components/Blog"
@@ -14,8 +14,8 @@ const Home = () => {
   return (
     <div className="container">
       <div className="news-container">
-        <div className="home-general-news">
-          <GenNews />
+        <div className="home-general-news" >
+          <GenNews className={styles.gennews}/>
         </div>
         
       </div>
