@@ -12,12 +12,12 @@ import NewsArticle from "./NewsArticle"
 
 const GenNews = () =>{
 
-    
+    const key = "3f2161859a5a4e52b7a8b16ff3493635";
     
 
     const [gennews, setgennews] = useState(null);
     useEffect(() => {
-        axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=3f2161859a5a4e52b7a8b16ff3493635`)
+        axios.get(`https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=${key}`)
         .then(data => {setgennews(data.data)})
         .catch(error => {console.log(error)})}
         , []);

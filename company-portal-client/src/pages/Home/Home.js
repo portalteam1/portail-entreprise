@@ -5,7 +5,7 @@ import styles from "../../styles/Home.module.css";
 
 //adding components
 import Blog from "../../components/Blog"
-import Weather from "../../components/Weather"
+import Weather from "../../components/Weather/Weather"
 import Updates from "../../components/dailyupdates"
 import GenNews from "../../components/News/GenNews";
 import CustomNews from "../../components/News/CustomNews";
@@ -19,7 +19,9 @@ const Home = () => {
         </div>
         
       </div>
-      
+      <div className="weather-container">
+        <Weather className={styles.weather}/>
+      </div>
       
     </div>
   );
