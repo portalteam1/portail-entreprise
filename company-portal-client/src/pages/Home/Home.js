@@ -1,7 +1,7 @@
 import React from "react";
 
 //adding style
-
+import styles from "../../styles/Home.module.css";
 
 //adding components
 import Blog from "../../components/Blog"
@@ -13,20 +13,15 @@ import CustomNews from "../../components/News/CustomNews";
 const Home = () => {
   return (
     <div className="container">
-
-          <div calssName="row">
-              <div className="news-container">
-        <div className=" col-lg home-general-news">
-          <GenNews />
+      <div className="news-container">
+        <div className="home-general-news" >
+          <GenNews className={styles.gennews}/>
         </div>
-          </div>
-              <div className="col-lg">
-          <Weather />
-        </div>
-
-          </div>
-
-      
+        
+      </div>
+      <div className="weather-container">
+        <Weather className={styles.weather}/>
+      </div>
       
     </div>
   );

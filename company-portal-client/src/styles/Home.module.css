@@ -1,0 +1,8 @@
+.gennews {
+  width: 50%;
+  display: flex !important;
+}
+
+.weather {
+  width: 50rem;
+}

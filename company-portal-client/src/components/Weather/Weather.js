@@ -1,6 +1,8 @@
 import React, { useState,useEffect } from 'react';
 import { usePosition } from 'use-position';
-import  './Weather.css';
+
+import styles from '../../styles/Weather.module.css';
+
 const api = {
     key: "30f10ec8bdd751c02d10d863e0504674",
     base: "https://api.openweathermap.org/data/2.5/"
@@ -58,13 +60,16 @@ function Weather() {
         return `${day} ${date} ${month} ${year}`
     }
 
+    const mainweather = (typeof weather.main != "undefined") ? ((weather.main.temp > 16) ? styles.warm : 'app') : 'app';
+
     return (
-        <div className={(typeof weather.main != "undefined") ? ((weather.main.temp > 16) ? 'app warm' : 'app') : 'app'}>
+        <div className={styles.main}>
+        <div className={`${styles.app} ${mainweather}`}>
             <main>
-                <div className="search-box">
+                <div className={styles.search_box}>
                     <input
                         type="text"
-                        className="search-bar"
+                        className={styles.search_bar}
                         placeholder="Search..."
                         onChange={e => setQuery(e.target.value)}
                         value={query}
@@ -74,18 +79,19 @@ function Weather() {
                 {(typeof weather.main != "undefined") ? (
                     <div>
                         <div className="location-box">
-                            <div className="location">{weather.name}, {weather.sys.country}</div>
-                            <div className="date">{dateBuilder(new Date())}</div>
+                            <div className={styles.location}>{weather.name}, {weather.sys.country}</div>
+                            <div className={styles.date}>{dateBuilder(new Date())}</div>
                         </div>
-                        <div className="weather-box">
-                            <div className="temp">
+                        <div className={styles.weather_box}>
+                            <div className={styles.temp}>
                                 {Math.round(weather.main.temp)}°c
                             </div>
-                            <div className="weather">{weather.weather[0].main}</div>
+                            <div className={styles.weather}>{weather.weather[0].main}</div>
                         </div>
                     </div>
                 ) : (<div> {Default()}</div>)}
             </main>
+        </div>
         </div>
     );
 }
