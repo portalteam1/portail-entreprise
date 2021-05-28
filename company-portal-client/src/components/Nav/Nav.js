@@ -90,6 +90,13 @@ const Nav = () => {
                 </i>About
               </NavLink> 
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/login" exact>
+                <i 
+                className="far fa-user">
+                </i>Login
+              </NavLink> 
+            </li>
         </ul>
       </div>
   </nav>

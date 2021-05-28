@@ -12,6 +12,7 @@ import Nav from "./components/Nav/Nav";
 import About from './pages/About/About';
 import Home from './pages/Home/Home';
 import Profile from './pages/Profile/Profile';
+import Login from './components/Login/Login';
 
 
 function App() {
@@ -30,6 +31,9 @@ function App() {
         </Route>
         <Route path="/profile" exact>
           <Profile/>
+        </Route>
+        <Route path="/login" exact>
+          <Login/>
         </Route>
         <Redirect to="/" />
       </Switch>
